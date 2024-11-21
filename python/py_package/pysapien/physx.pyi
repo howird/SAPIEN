@@ -2,7 +2,6 @@ from __future__ import annotations
 import numpy
 import pybind11_stubgen.typing_ext
 import sapien.pysapien
-import sapien.pysapien_pinocchio
 import typing
 __all__ = ['PhysxArticulation', 'PhysxArticulationJoint', 'PhysxArticulationLinkComponent', 'PhysxBaseComponent', 'PhysxBodyConfig', 'PhysxCollisionShape', 'PhysxCollisionShapeBox', 'PhysxCollisionShapeCapsule', 'PhysxCollisionShapeConvexMesh', 'PhysxCollisionShapeCylinder', 'PhysxCollisionShapePlane', 'PhysxCollisionShapeSphere', 'PhysxCollisionShapeTriangleMesh', 'PhysxContact', 'PhysxContactPoint', 'PhysxCpuSystem', 'PhysxDistanceJointComponent', 'PhysxDriveComponent', 'PhysxEngine', 'PhysxGearComponent', 'PhysxGpuContactBodyImpulseQuery', 'PhysxGpuContactPairImpulseQuery', 'PhysxGpuSystem', 'PhysxJointComponent', 'PhysxMaterial', 'PhysxRayHit', 'PhysxRigidBaseComponent', 'PhysxRigidBodyComponent', 'PhysxRigidDynamicComponent', 'PhysxRigidStaticComponent', 'PhysxSDFConfig', 'PhysxSceneConfig', 'PhysxShapeConfig', 'PhysxSystem', 'get_body_config', 'get_default_material', 'get_scene_config', 'get_sdf_config', 'get_shape_config', 'is_gpu_enabled', 'set_body_config', 'set_default_material', 'set_gpu_memory_config', 'set_scene_config', 'set_sdf_config', 'set_shape_config', 'version']
 M = typing.TypeVar("M", bound=int)
@@ -19,9 +18,6 @@ class PhysxArticulation:
     sleep_threshold: float
     solver_position_iterations: int
     solver_velocity_iterations: int
-    @staticmethod
-    def create_pinocchio_model(articulation: PhysxArticulation, gravity = [0, 0, -9.81]) -> sapien.pysapien_pinocchio.PinocchioModel:
-        ...
     def clone_links(self) -> list[PhysxArticulationLinkComponent]:
         ...
     def compute_passive_force(self, gravity: bool = True, coriolis_and_centrifugal: bool = True) -> numpy.ndarray[tuple[M, typing.Literal[1]], numpy.dtype[numpy.float32]]:

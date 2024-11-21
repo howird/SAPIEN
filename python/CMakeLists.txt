@@ -26,14 +26,16 @@ macro(FetchContent_MakeAvailableExclude)
 endmacro()
 
 list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
-include(eigen)
-include(pybind11)
+find_package(Eigen3 REQUIRED)
+find_package(pybind11 REQUIRED)
+find_package(VulkanHeaders REQUIRED)
+find_package(svulkan2 REQUIRED)
 
 find_package(sapien REQUIRED)
 
 file(GLOB_RECURSE PYBIND_SRC "pybind/*.cpp")
 pybind11_add_module(pysapien ${PYBIND_SRC})
-target_link_libraries(pysapien PRIVATE sapien::sapien eigen)
+target_link_libraries(pysapien PRIVATE sapien::sapien Eigen3::Eigen svulkan2::svulkan2 Vulkan::Headers)
 target_compile_definitions(pysapien PRIVATE PYBIND11_USE_SMART_HOLDER_AS_DEFAULT)
 
 if (MSVC)
